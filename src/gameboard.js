@@ -17,24 +17,29 @@ const Gameboard = () => {
   const destroyer = Ship(3);
 
   const shipsCoords = [];
-  const eachCoords = (cordinates) => {
-    const algo = cordinates;
-    shipsCoords.push(algo);
-  };
 
-  eachCoords("g8");
+  const submarineCoords = ["g8", "g9"];
+  const destroyerCoords = ["d5", "d6", "d7"];
+  shipsCoords.push(submarineCoords, destroyerCoords);
 
-  const useCordinates = [];
+  const useCoordinates = [];
   const missedAttacks = [];
 
-  const receiveAttack = (cordinates) => {
-    if (grid.includes(cordinates)) {
-      if (useCordinates.includes(cordinates)) {
+  const receiveAttack = (coordinates) => {
+    if (grid.includes(coordinates)) {
+      if (useCoordinates.includes(coordinates)) {
         return "Choose another spot!";
       }
-      useCordinates.push(cordinates);
-      if (shipsCoords.includes(cordinates)) {
-        submarine.hit();
+      useCoordinates.push(coordinates);
+      if (JSON.stringify(shipsCoords).includes(coordinates)) {
+        if (submarineCoords.includes(coordinates)) {
+          submarine.hit();
+          return "You hit a submarine!";
+        }
+        if (destroyerCoords.includes(coordinates)) {
+          destroyer.hit();
+          return "You hit a destroyer!";
+        }
         return "You hit a ship!";
       }
       missedAttacks.push();
@@ -54,4 +59,4 @@ const Gameboard = () => {
 
 const gameboardOne = Gameboard();
 
-export default gameboardOne;
+export default Gameboard;
