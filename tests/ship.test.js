@@ -1,5 +1,9 @@
-import carrier from "../src/ship";
+import Ship from "../src/ship";
 
-test.skip("the ship is sunk", () => {
+const carrier = Ship(2);
+carrier.hit();
+carrier.hit();
+
+test("the ship is sunk", () => {
   expect(carrier.isSunk()).toBe(true);
 });

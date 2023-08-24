@@ -1,31 +1,29 @@
-import gameboardOne from "../src/gameboard";
+import Gameboard from "../src/gameboard";
 
-test.skip("All ships are sunk", () => {
-  expect(gameboardOne.allSunk()).toBe(true);
+const gameboardOne = Gameboard();
+
+test("All ships are sunk", () => {
+  expect(gameboardOne.allSunk()).toBe(false);
 });
 
-test.skip("A ship was hit", () => {
-  expect(gameboardOne.receiveAttack("g8")).toBe("You hit a ship!");
+test("A submarine was hit", () => {
+  expect(gameboardOne.receiveAttack("g8")).toBe("You hit a submarine!");
 });
 
-test.skip("Player select the same spot twice", () => {
+test("A battleship was hit", () => {
+  expect(gameboardOne.receiveAttack("h8")).toBe("You hit a battleship!");
+});
+
+test("Player select the same spot twice", () => {
   expect(gameboardOne.receiveAttack("g8")).toBe("Choose another spot!");
 });
 
-test.skip("Failed shot", () => {
-  expect(gameboardOne.receiveAttack("f10")).toBe("You missed!");
+test("Failed shot", () => {
+  expect(gameboardOne.receiveAttack("f9")).toBe("You missed!");
 });
 
-test.skip("Shot an a playable spot", () => {
+test("Shot an a playable spot", () => {
   expect(gameboardOne.receiveAttack("r5")).toBe(
     "Coordinates not inside of grid"
   );
-});
-
-test.skip("Player hit an specific ship(submarine)", () => {
-  expect(gameboardOne.receiveAttack("g9")).toBe("You hit a submarine!");
-});
-
-test.skip("Player hit an specific ship(destroyer)", () => {
-  expect(gameboardOne.receiveAttack("d6")).toBe("You hit a destroyer!");
 });

@@ -1,5 +1,2 @@
-import gameboardOne from "./gameboard";
-
-console.log("hello once moree");
-
-gameboardOne.createGrid();
+import Gameboard from "./gameboard";
+import { Player, PlayerAI } from "./player";

@@ -1,26 +1,30 @@
 import Ship from "./ship";
+import createGrid from "./createGrid";
 
 const Gameboard = () => {
-  const grid = [];
-  const createGrid = () => {
-    const gridVertical = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j"];
-    for (let rows = 1; rows < 11; rows++) {
-      for (let columns = 0; columns < 10; columns++) {
-        const squares = gridVertical[columns] + rows;
-        grid.push(squares);
-      }
-    }
-  };
-  createGrid();
+  const grid = createGrid();
 
-  const submarine = Ship(2);
+  const carrier = Ship(5);
+  const battleship = Ship(4);
   const destroyer = Ship(3);
+  const destroyer2 = Ship(3);
+  const submarine = Ship(2);
 
   const shipsCoords = [];
 
+  const carrierCoord = ["b2", "b3", "b4", "b5", "b6"];
+  const battleshipCoord = ["h6", "h7", "h8", "h9"];
+  const destroyerCoord = ["d5", "d6", "d7"];
+  const destroyer2Coord = ["e0", "e1", "e2"];
   const submarineCoords = ["g8", "g9"];
-  const destroyerCoords = ["d5", "d6", "d7"];
-  shipsCoords.push(submarineCoords, destroyerCoords);
+
+  shipsCoords.push(
+    carrierCoord,
+    battleshipCoord,
+    destroyerCoord,
+    destroyer2Coord,
+    submarineCoords
+  );
 
   const useCoordinates = [];
   const missedAttacks = [];
@@ -32,13 +36,25 @@ const Gameboard = () => {
       }
       useCoordinates.push(coordinates);
       if (JSON.stringify(shipsCoords).includes(coordinates)) {
+        if (carrierCoord.includes(coordinates)) {
+          carrier.hit();
+          return "You hit a carrier!";
+        }
+        if (battleshipCoord.includes(coordinates)) {
+          battleship.hit();
+          return "You hit a battleship!";
+        }
+        if (destroyerCoord.includes(coordinates)) {
+          destroyer.hit();
+          return "You hit a destroyer!";
+        }
+        if (destroyer2Coord.includes(coordinates)) {
+          destroyer2.hit();
+          return "You hit a destroyer2!";
+        }
         if (submarineCoords.includes(coordinates)) {
           submarine.hit();
           return "You hit a submarine!";
-        }
-        if (destroyerCoords.includes(coordinates)) {
-          destroyer.hit();
-          return "You hit a destroyer!";
         }
         return "You hit a ship!";
       }
@@ -49,14 +65,19 @@ const Gameboard = () => {
   };
 
   const allSunk = () => {
-    if (submarine.isSunk() && destroyer.isSunk()) {
+    if (
+      carrier.isSunk() &&
+      battleship.isSunk() &&
+      destroyer.isSunk() &&
+      destroyer2.isSunk() &&
+      submarine.isSunk()
+    ) {
       return true;
     }
+    return false;
   };
 
-  return { receiveAttack, allSunk, createGrid };
+  return { receiveAttack, allSunk };
 };
-
-const gameboardOne = Gameboard();
 
 export default Gameboard;
