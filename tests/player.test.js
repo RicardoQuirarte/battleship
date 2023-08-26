@@ -1,14 +1,14 @@
+import Gameboard from "../src/gameboard";
 import { Player, PlayerAI } from "../src/player";
 
-const ricardo = Player();
-const computer = PlayerAI();
+const gameboardTwo = Gameboard();
+const gameboardOne = Gameboard();
+
+const ricardo = Player(gameboardTwo);
+const computer = PlayerAI(gameboardOne);
 
 test("Ricardo attack", () => {
-  expect(ricardo.attack("d7")).toBe("Ricardo attack successful");
-});
-
-test("Not player turn", () => {
-  expect(ricardo.attack("b2")).toBe("Is not your turn!");
+  expect(ricardo.attack("g8")).toBe("Ricardo attack successful");
 });
 
 test("Computer attack", () => {

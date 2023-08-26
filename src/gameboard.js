@@ -77,7 +77,7 @@ const Gameboard = () => {
     return false;
   };
 
-  return { receiveAttack, allSunk };
+  return { receiveAttack, allSunk, createGrid };
 };
 
 export default Gameboard;

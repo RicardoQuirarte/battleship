@@ -1,28 +1,15 @@
-import Gameboard from "./gameboard";
 import generatedCoord from "./generatedCoord";
 
-const gameboardOne = Gameboard();
-const gameboardTwo = Gameboard();
-
-let playerOne = true;
-let playerTwo = false;
-
-export const Player = () => {
+export const Player = (gameboard) => {
   const attack = (coordinates) => {
-    if (playerOne) {
-      gameboardTwo.receiveAttack(coordinates);
-      playerOne = false;
-      playerTwo = true;
-      return "Ricardo attack successful";
-    }
-    if (playerTwo) {
-      return "Is not your turn!";
-    }
+    const result = gameboard.receiveAttack(coordinates);
+    return result;
+    // return "Ricardo attack successful";
   };
   return { attack };
 };
 
-export const PlayerAI = () => {
+export const PlayerAI = (gameboard) => {
   const useCoordinates = [];
   let randomPlay = generatedCoord();
   useCoordinates.push(randomPlay);
@@ -30,15 +17,8 @@ export const PlayerAI = () => {
     randomPlay = generatedCoord();
   }
   const attack = () => {
-    if (playerTwo) {
-      gameboardOne.receiveAttack(randomPlay);
-      playerOne = false;
-      playerTwo = true;
-      return "Computer attack successful";
-    }
-    if (playerOne) {
-      return "Is not your turn!";
-    }
+    gameboard.receiveAttack(randomPlay);
+    return "Computer attack successful";
   };
   return { attack };
 };
