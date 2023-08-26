@@ -1,18 +1,47 @@
+:root {
+  --gris: rgb(152, 158, 164);
+}
+
 body {
-  background-color: rgb(152, 158, 164);
+  background-color: #eeeeee;
 }
 
 .head {
   font-size: 5rem;
-  color: white;
+  color: var(--gris);
   display: grid;
   place-content: center;
   margin-top: 10vh;
 }
 
+.boardgames {
+  display: flex;
+  flex-direction: row;
+  place-content: center;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: repeat(10, 30px);
+  margin: 10vw;
+}
+
 .squares {
-  width: 15px;
-  height: 15px;
+  width: 30px;
+  height: 30px;
   background-color: white;
-  border: solid 1px black;
+  border: solid 1px var(--gris);
+}
+
+.squares:hover {
+  background-color: #f3f4f6;
+  cursor: all-scroll;
+}
+
+.messages {
+  display: grid;
+  place-content: center;
+  font-size: 3rem;
+  color: royalblue;
+  margin-top: 2vh;
 }

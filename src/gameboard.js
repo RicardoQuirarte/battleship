@@ -26,42 +26,35 @@ const Gameboard = () => {
     submarineCoords
   );
 
-  const useCoordinates = [];
+  const useCoordinates = ["a0"];
   const missedAttacks = [];
 
   const receiveAttack = (coordinates) => {
-    if (grid.includes(coordinates)) {
-      if (useCoordinates.includes(coordinates)) {
-        return "Choose another spot!";
-      }
-      useCoordinates.push(coordinates);
-      if (JSON.stringify(shipsCoords).includes(coordinates)) {
-        if (carrierCoord.includes(coordinates)) {
-          carrier.hit();
-          return "You hit a carrier!";
-        }
-        if (battleshipCoord.includes(coordinates)) {
-          battleship.hit();
-          return "You hit a battleship!";
-        }
-        if (destroyerCoord.includes(coordinates)) {
-          destroyer.hit();
-          return "You hit a destroyer!";
-        }
-        if (destroyer2Coord.includes(coordinates)) {
-          destroyer2.hit();
-          return "You hit a destroyer2!";
-        }
-        if (submarineCoords.includes(coordinates)) {
-          submarine.hit();
-          return "You hit a submarine!";
-        }
-        return "You hit a ship!";
-      }
-      missedAttacks.push();
-      return "You missed!";
+    if (useCoordinates.includes(coordinates)) {
+      console.log(useCoordinates);
+      return "Choose another spot!";
     }
-    return "Coordinates not inside of grid";
+    // useCoordinates.push(coordinates);
+    if (JSON.stringify(shipsCoords).includes(coordinates)) {
+      if (carrierCoord.includes(coordinates)) {
+        carrier.hit();
+      }
+      if (battleshipCoord.includes(coordinates)) {
+        battleship.hit();
+      }
+      if (destroyerCoord.includes(coordinates)) {
+        destroyer.hit();
+      }
+      if (destroyer2Coord.includes(coordinates)) {
+        destroyer2.hit();
+      }
+      if (submarineCoords.includes(coordinates)) {
+        submarine.hit();
+      }
+      return "You hit a ship!";
+    }
+    missedAttacks.push(coordinates);
+    return "You missed!";
   };
 
   const allSunk = () => {

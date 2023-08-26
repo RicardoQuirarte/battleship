@@ -1,14 +1,12 @@
-import Gameboard from "./gameboard";
+const renderGameboard = (gameboard, container) => {
+  gameboard.forEach(() => {
+    const div = document.createElement("div");
+    div.classList.add("squares");
+    div.addEventListener("click", () => {
+      console.log("attack");
+    });
+    container.appendChild(div);
+  });
+};
 
-const gameboardOne = Gameboard();
-const gameboardTwo = Gameboard();
-
-const container = document.querySelector(".container");
-
-gameboardOne.createGrid().forEach((element) => {
-  const div = document.createElement("div");
-  div.classList.add("squares");
-  container.appendChild(div);
-});
-
-console.log("hello");
+export default renderGameboard;

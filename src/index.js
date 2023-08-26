@@ -1,6 +1,7 @@
 import Gameboard from "./gameboard";
 import { Player, PlayerAI } from "./player";
 import "./style/style.css";
+// import renderGameboard from "./dom";
 
 const gameboardOne = Gameboard();
 const gameboardTwo = Gameboard();
@@ -23,14 +24,32 @@ function gameLoop() {
   }
 }
 
-// // // // // // // // // // // // // // //
-
 const container = document.querySelector(".container");
+const container2 = document.querySelector(".container2");
+const messages = document.querySelector(".messages");
 
-gameboardOne.createGrid().forEach(() => {
-  const div = document.createElement("div");
-  div.classList.add("squares");
-  container.appendChild(div);
-});
+// function attack() {
+//   ricardo.attack();
+//   console.log("helo");
+// }
 
-console.log(gameboardOne.createGrid());
+const renderGameboard = (gameboard, containerr) => {
+  gameboard.forEach((element) => {
+    const div = document.createElement("div");
+    div.classList.add("squares");
+    div.textContent = element;
+    div.addEventListener("click", () => {
+      messages.textContent = ricardo.attack(element);
+      console.log(ricardo.attack(element));
+      if (messages.textContent === "You hit a ship!") {
+        div.setAttribute("style", "background-color: red");
+      } else {
+        div.setAttribute("style", "background-color: green");
+      }
+    });
+    containerr.appendChild(div);
+  });
+};
+
+renderGameboard(gameboardOne.createGrid(), container);
+renderGameboard(gameboardTwo.createGrid(), container2);
