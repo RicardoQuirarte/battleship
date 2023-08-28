@@ -4,21 +4,21 @@ export const Player = (gameboard) => {
   const attack = (coordinates) => {
     const result = gameboard.receiveAttack(coordinates);
     return result;
-    // return "Ricardo attack successful";
   };
   return { attack };
 };
 
 export const PlayerAI = (gameboard) => {
   const useCoordinates = [];
-  let randomPlay = generatedCoord();
-  useCoordinates.push(randomPlay);
-  while (useCoordinates.includes(randomPlay)) {
-    randomPlay = generatedCoord();
-  }
   const attack = () => {
+    let randomPlay = generatedCoord();
+    while (useCoordinates.includes(randomPlay)) {
+      randomPlay = generatedCoord();
+    }
+    useCoordinates.push(randomPlay);
     gameboard.receiveAttack(randomPlay);
-    return "Computer attack successful";
+    const result = gameboard.receiveAttack(randomPlay);
+    return { result, randomPlay };
   };
   return { attack };
 };

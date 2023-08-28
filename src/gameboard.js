@@ -30,10 +30,9 @@ const Gameboard = () => {
   const missedAttacks = [];
 
   const receiveAttack = (coordinates) => {
-    if (useCoordinates.includes(coordinates)) {
-      console.log(useCoordinates);
-      return "Choose another spot!";
-    }
+    // if (useCoordinates.includes(coordinates)) {
+    //   return "Choose another spot!";
+    // }
     // useCoordinates.push(coordinates);
     if (JSON.stringify(shipsCoords).includes(coordinates)) {
       if (carrierCoord.includes(coordinates)) {
@@ -54,7 +53,7 @@ const Gameboard = () => {
       return "You hit a ship!";
     }
     missedAttacks.push(coordinates);
-    return "You missed!";
+    return "You miss!";
   };
 
   const allSunk = () => {
