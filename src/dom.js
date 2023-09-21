@@ -1,12 +1,21 @@
-const renderGameboard = (gameboard, container) => {
-  gameboard.forEach(() => {
+export const renderGameboard = (gameboard, containerr, attack) => {
+  gameboard.forEach((element) => {
     const div = document.createElement("div");
     div.classList.add("squares");
+    div.textContent = element;
     div.addEventListener("click", () => {
-      console.log("attack");
+      attack(element, div);
     });
-    container.appendChild(div);
+    containerr.appendChild(div);
   });
 };
 
-export default renderGameboard;
+export const renderGameboardComputer = (gameboard, containerr) => {
+  gameboard.forEach((element) => {
+    const div = document.createElement("div");
+    div.classList.add("squares", "computer-grid");
+    div.textContent = element;
+    div.setAttribute("id", element);
+    containerr.appendChild(div);
+  });
+};

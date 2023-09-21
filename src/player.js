@@ -5,7 +5,13 @@ export const Player = (gameboard) => {
     const result = gameboard.receiveAttack(coordinates);
     return result;
   };
-  return { attack };
+  function gameOver() {
+    if (gameboard.allSunk()) {
+      return true;
+    }
+    return false;
+  }
+  return { attack, gameOver };
 };
 
 export const PlayerAI = (gameboard) => {
@@ -16,9 +22,14 @@ export const PlayerAI = (gameboard) => {
       randomPlay = generatedCoord();
     }
     useCoordinates.push(randomPlay);
-    gameboard.receiveAttack(randomPlay);
     const result = gameboard.receiveAttack(randomPlay);
     return { result, randomPlay };
   };
-  return { attack };
+  const gameOver = () => {
+    if (gameboard.allSunk()) {
+      return true;
+    }
+    return false;
+  };
+  return { attack, gameOver };
 };

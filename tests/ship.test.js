@@ -1,6 +1,7 @@
 import Ship from "../src/ship";
 
-const carrier = Ship(2);
+const carrier = Ship(3);
+carrier.hit();
 carrier.hit();
 carrier.hit();
 

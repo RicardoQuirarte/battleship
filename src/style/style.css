@@ -46,3 +46,26 @@ body {
   color: royalblue;
   margin-top: 2vh;
 }
+
+.play-again-style {
+  border: solid 1px royalblue;
+  padding: 5px;
+}
+
+.play-again-style:hover {
+  background-color: royalblue;
+  color: white;
+  cursor: pointer;
+}
+
+.clicked {
+  pointer-events: none;
+}
+
+.clicked:hover {
+  cursor: auto;
+}
+
+.computer-grid:hover {
+  cursor: auto;
+}

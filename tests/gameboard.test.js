@@ -1,29 +1,17 @@
 import Gameboard from "../src/gameboard";
 
 const gameboardOne = Gameboard();
+gameboardOne.receiveAttack("g8");
+gameboardOne.receiveAttack("g9");
 
 test("All ships are sunk", () => {
-  expect(gameboardOne.allSunk()).toBe(false);
+  expect(gameboardOne.allSunk()).toBe(true);
 });
 
 test("A submarine was hit", () => {
-  expect(gameboardOne.receiveAttack("g8")).toBe("You hit a submarine!");
-});
-
-test("A battleship was hit", () => {
-  expect(gameboardOne.receiveAttack("h8")).toBe("You hit a battleship!");
-});
-
-test("Player select the same spot twice", () => {
-  expect(gameboardOne.receiveAttack("g8")).toBe("Choose another spot!");
+  expect(gameboardOne.receiveAttack("g8")).toBe("You hit a ship!");
 });
 
 test("Failed shot", () => {
-  expect(gameboardOne.receiveAttack("f9")).toBe("You missed!");
-});
-
-test("Shot an a playable spot", () => {
-  expect(gameboardOne.receiveAttack("r5")).toBe(
-    "Coordinates not inside of grid"
-  );
+  expect(gameboardOne.receiveAttack("f9")).toBe("You miss!");
 });

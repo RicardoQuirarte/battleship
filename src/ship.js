@@ -1,16 +1,15 @@
 const Ship = (length) => {
   let hits = 0;
-  let sunk = false;
 
   const hit = () => {
-    hits += 1;
+    hits++;
   };
 
   const isSunk = () => {
     if (length === hits) {
-      sunk = true;
+      return true;
     }
-    return sunk;
+    return false;
   };
 
   return { hit, isSunk };
