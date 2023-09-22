@@ -11,10 +11,38 @@
   <body>
     <div class="head">BATTLESHIP</div>
     <div class="boardgames">
-      <div class="container" id="algo"></div>
+      <div class="container"></div>
       <div class="container container2"></div>
     </div>
-    <div class="messages">Play a new game!</div>
+    <form action="">
+      <div>
+        <label for="carrier">Carrier</label>
+        <input type="text" name="carrier" id="carrier" />
+      </div>
+      <div>
+        <label for="battleship">Battleship</label>
+        <input type="text" name="battleship" id="battleship" />
+      </div>
+      <div>
+        <label for="destroyer">Destroyer</label>
+        <input type="text" name="destroyer" id="destroyer" />
+      </div>
+      <div>
+        <label for="destroyer2">Destroyer2</label>
+        <input type="text" name="destroyer2" id="destroyer2" />
+      </div>
+      <div>
+        <label for="submarine">Submarine</label>
+        <input
+          type="text"
+          name="submarine"
+          id="submarine"
+          placeholder="'g8, g9'"
+        />
+      </div>
+      <button>Confirm</button>
+    </form>
+    <div class="messages">Start a new game!</div>
     <div class="messages computer-messages"></div>
     <div class="messages play-again"></div>
   </body>

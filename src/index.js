@@ -32,6 +32,7 @@ function attackComputer() {
 function attack(element, div) {
   const result = ricardo.attack(element);
   if (ricardo.gameOver()) {
+    computerMsg.classList.add("winner");
     computerMsg.textContent = "Ricardo has won the game! 🎉";
     playAgain.textContent = "Play again";
     playAgain.classList.add("play-again-style");
