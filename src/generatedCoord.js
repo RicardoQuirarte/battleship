@@ -1,4 +1,4 @@
-function generatedCoord() {
+function generatedCoord(length) {
   const characters = "abcdefghij";
   const numbers = "0123456789";
   let result1 = "";

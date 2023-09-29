@@ -2,55 +2,97 @@ import "./style/style.css";
 import Gameboard from "./gameboard";
 import { Player, PlayerAI } from "./player";
 import { renderGameboard, renderGameboardComputer } from "./dom";
+import generatedCoord from "./generatedCoord";
 
-const gameboardOne = Gameboard();
-const gameboardTwo = Gameboard();
-
-const ricardo = Player(gameboardOne);
-const computer = PlayerAI(gameboardTwo);
-
+const initialPage = document.querySelector(".initial-page");
 const container = document.querySelector(".container");
 const container2 = document.querySelector(".container2");
+const placementContainer = document.querySelector(".placement-container");
 const messages = document.querySelector(".messages");
-const computerMsg = document.querySelector(".computer-messages");
 const playAgain = document.querySelector(".play-again");
+const submitCoords = document.querySelector("#submit");
+const submarine = document.querySelector("#submarine");
+const destroyer = document.querySelector("#destroyer");
+const battleship = document.querySelector("#battleship");
+const carrier = document.querySelector("#carrier");
 
-function attackComputer() {
-  const result = computer.attack();
-  const random = result.randomPlay;
-  const div = document.querySelector(`#${random}`);
-  if (result.result === "You hit a ship!") {
-    div.setAttribute("style", "background-color: red");
-  }
-  if (result.result === "You miss!")
-    div.setAttribute("style", "background-color: green");
-  if (computer.gameOver()) {
-    computerMsg.textContent = "Computer has won the game";
+const placementGameboard = Gameboard();
+renderGameboardComputer(placementGameboard.createGrid(), placementContainer);
+
+function showSelection(input) {
+  const array = input.value.split("-");
+  for (let i = 0; i < array.length; i++) {
+    const div = document.querySelector(`#${array[i]}`);
+    div.classList.add("selected");
   }
 }
 
-function attack(element, div) {
-  const result = ricardo.attack(element);
-  if (ricardo.gameOver()) {
-    computerMsg.classList.add("winner");
-    computerMsg.textContent = "Ricardo has won the game! 🎉";
-    playAgain.textContent = "Play again";
-    playAgain.classList.add("play-again-style");
-    container.classList.add("clicked");
+submarine.addEventListener("focusout", () => {
+  showSelection(submarine);
+});
+destroyer.addEventListener("focusout", () => {
+  showSelection(destroyer);
+});
+battleship.addEventListener("focusout", () => {
+  showSelection(battleship);
+});
+carrier.addEventListener("focusout", () => {
+  showSelection(carrier);
+});
+
+function startGame(e) {
+  e.preventDefault();
+  initialPage.classList.add("remove");
+  const ship1 = submarine.value.split("-");
+  const ship2 = destroyer.value.split("-");
+  const ship3 = battleship.value.split("-");
+  const ship4 = carrier.value.split("-");
+
+  const gameboardOne = Gameboard(ship1, ship2, ship3, ship4);
+  const gameboardTwo = Gameboard(ship1, ship2, ship3, ship4);
+
+  const ricardo = Player(gameboardOne);
+  const computer = PlayerAI(gameboardTwo);
+
+  function attackComputer() {
+    const result = computer.attack();
+    const random = result.randomPlay;
+    const div = document.querySelector(`#${random}`);
+    if (result.result === "You hit a ship!") {
+      div.setAttribute("style", "background-color: red");
+    }
+    if (result.result === "You miss!")
+      div.setAttribute("style", "background-color: green");
+    if (computer.gameOver()) {
+      messages.textContent = "Computer has won the game 🖥️";
+      playAgain.textContent = "Play again";
+      container.classList.add("clicked");
+    }
   }
-  div.classList.add("clicked");
-  messages.textContent = result;
-  if (result === "You hit a ship!") {
-    div.setAttribute("style", "background-color: red");
+
+  function attack(element, div) {
+    const result = ricardo.attack(element);
+    div.classList.add("clicked");
+    messages.textContent = result;
+    if (result === "You hit a ship!") {
+      div.setAttribute("style", "background-color: red");
+    }
+    if (result === "You miss!") {
+      div.setAttribute("style", "background-color: green");
+    }
+    if (ricardo.gameOver()) {
+      messages.textContent = "Ricardo has won the game! 🎉";
+      playAgain.textContent = "Play again";
+      container.classList.add("clicked");
+    }
+    attackComputer();
   }
-  if (result === "You miss!") {
-    div.setAttribute("style", "background-color: green");
-  }
-  attackComputer();
+
+  renderGameboard(gameboardOne.createGrid(), container, attack);
+  renderGameboardComputer(gameboardTwo.createGrid(), container2);
 }
 
-renderGameboard(gameboardOne.createGrid(), container, attack);
-renderGameboardComputer(gameboardTwo.createGrid(), container2);
+submitCoords.addEventListener("click", startGame);
 
 playAgain.addEventListener("click", () => {
   location.reload();

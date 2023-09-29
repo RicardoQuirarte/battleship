@@ -18,13 +18,14 @@ body {
   display: flex;
   flex-direction: row;
   place-content: center;
-  font-size: 0.9rem;
 }
 
 .container {
   display: grid;
   grid-template-columns: repeat(10, 30px);
-  margin: 10vw;
+  margin: 5vw;
+  place-content: center;
+  font-size: 0.9rem;
 }
 
 .squares {
@@ -47,13 +48,12 @@ body {
   margin-top: 2vh;
 }
 
-.play-again-style {
-  border: solid 1px yellowgreen;
+.play-again {
   padding: 5px;
   color: yellowgreen;
 }
 
-.play-again-style:hover {
+.play-again:hover {
   background-color: royalblue;
   color: white;
   cursor: pointer;
@@ -76,5 +76,40 @@ body {
 }
 
 form {
+  display: grid;
+  place-content: center;
+}
+
+input {
+  margin-bottom: 10px;
+  border: 1px solid var(--gris);
+  text-align: center;
+}
+
+button {
+  background-color: royalblue;
+  border: 1px solid white;
+  color: white;
+  padding: 5px;
+}
+
+label {
   display: flex;
+  place-content: center;
+  margin-bottom: 2px;
+}
+
+.initial-page {
+  display: flex;
+  flex-direction: row;
+  place-content: center;
+}
+
+.remove {
+  display: none;
+}
+
+.selected {
+  background-color: palevioletred;
+  color: white;
 }

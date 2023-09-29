@@ -16,7 +16,6 @@ export const renderGameboardComputer = (gameboard, containerr) => {
     div.classList.add("squares", "computer-grid");
     div.setAttribute("id", element);
     div.textContent = element;
-
     containerr.appendChild(div);
   });
 };
