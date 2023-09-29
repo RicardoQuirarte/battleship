@@ -14,36 +14,53 @@
       <div class="container"></div>
       <div class="container container2"></div>
     </div>
-    <form action="">
-      <div>
-        <label for="carrier">Carrier</label>
-        <input type="text" name="carrier" id="carrier" />
-      </div>
-      <div>
-        <label for="battleship">Battleship</label>
-        <input type="text" name="battleship" id="battleship" />
-      </div>
-      <div>
-        <label for="destroyer">Destroyer</label>
-        <input type="text" name="destroyer" id="destroyer" />
-      </div>
-      <div>
-        <label for="destroyer2">Destroyer2</label>
-        <input type="text" name="destroyer2" id="destroyer2" />
-      </div>
-      <div>
-        <label for="submarine">Submarine</label>
-        <input
-          type="text"
-          name="submarine"
-          id="submarine"
-          placeholder="'g8, g9'"
-        />
-      </div>
-      <button>Confirm</button>
-    </form>
-    <div class="messages">Start a new game!</div>
-    <div class="messages computer-messages"></div>
+    <div class="initial-page">
+      <form action="">
+        <div>
+          <div><label for="carrier">Carrier (5)</label></div>
+          <input
+            type="text"
+            name="carrier"
+            id="carrier"
+            placeholder="b2-b3-b4-b5-b6"
+            maxlength="14"
+          />
+        </div>
+        <div>
+          <div><label for="battleship">Battleship (4)</label></div>
+          <input
+            type="text"
+            name="battleship"
+            id="battleship"
+            placeholder="h6-h7-h8-h9"
+            maxlength="11"
+          />
+        </div>
+        <div>
+          <div><label for="destroyer">Destroyer (3)</label></div>
+          <input
+            type="text"
+            name="destroyer"
+            id="destroyer"
+            placeholder="d5-d6-d7"
+            maxlength="8"
+          />
+        </div>
+        <div>
+          <div><label for="submarine">Submarine (2)</label></div>
+          <input
+            type="text"
+            name="submarine"
+            id="submarine"
+            placeholder="g8-g9"
+            maxlength="5"
+          />
+        </div>
+        <button id="submit">Start a new game</button>
+      </form>
+      <div class="container placement-container"></div>
+    </div>
+    <div class="messages"></div>
     <div class="messages play-again"></div>
   </body>
 </html>
