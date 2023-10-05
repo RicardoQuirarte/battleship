@@ -23,7 +23,7 @@ body {
 .container {
   display: grid;
   grid-template-columns: repeat(10, 30px);
-  margin: 5vw;
+  margin: 2.5vw;
   place-content: center;
   font-size: 0.9rem;
 }
