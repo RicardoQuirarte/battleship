@@ -48,12 +48,12 @@ body {
   margin-top: 2vh;
 }
 
-.play-again {
+.play-again-style {
   padding: 5px;
   color: yellowgreen;
 }
 
-.play-again:hover {
+.play-again-style:hover {
   background-color: royalblue;
   color: white;
   cursor: pointer;
@@ -112,4 +112,23 @@ label {
 .selected {
   background-color: palevioletred;
   color: white;
+}
+
+input:invalid {
+  border: 1px solid red;
+}
+
+input:valid {
+  border: 1px solid green;
+}
+
+.required {
+  color: #eeeeee;
+  width: 150px;
+  font-size: 0.8rem;
+  text-align: center;
+}
+
+.color {
+  color: red;
 }

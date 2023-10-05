@@ -25,21 +25,6 @@ const Gameboard = (
 
   const shipsCoords = [];
 
-  //
-  // const useCoordinates = [];
-
-  // let randomPlay = generatedCoord();
-
-  // while (useCoordinates.includes(randomPlay)) {
-  //   randomPlay = generatedCoord();
-  // }
-  // useCoordinates.push(randomPlay);
-  //
-
-  // const carrierCoord = ["b2", "b3", "b4", "b5", "b6"];
-  // const battleshipCoord = ["h6", "h7", "h8", "h9"];
-  // const destroyerCoord = ["d5", "d6", "d7"];
-
   const carrierCoord = coordsCarrier;
   const battleshipCoord = coordsBattleship;
   const destroyerCoord = coordsDestroyer;
@@ -54,17 +39,29 @@ const Gameboard = (
 
   const receiveAttack = (coordinates) => {
     if (JSON.stringify(shipsCoords).includes(coordinates)) {
-      // if (carrierCoord.includes(coordinates)) {
-      //   carrier.hit();
-      // }
-      // if (battleshipCoord.includes(coordinates)) {
-      //   battleship.hit();
-      // }
-      // if (destroyerCoord.includes(coordinates)) {
-      //   destroyer.hit();
-      // }
+      if (carrierCoord.includes(coordinates)) {
+        carrier.hit();
+        if (carrier.isSunk()) {
+          return "You sank a carrier!! (5)";
+        }
+      }
+      if (battleshipCoord.includes(coordinates)) {
+        battleship.hit();
+        if (battleship.isSunk()) {
+          return "You sank a battleship!! (4)";
+        }
+      }
+      if (destroyerCoord.includes(coordinates)) {
+        destroyer.hit();
+        if (destroyer.isSunk()) {
+          return "You sank a destroyer!! (3)";
+        }
+      }
       if (submarineCoords.includes(coordinates)) {
         submarine.hit();
+        if (submarine.isSunk()) {
+          return "You sank a submarine!! (2)";
+        }
       }
       return "You hit a ship!";
     }
@@ -73,10 +70,10 @@ const Gameboard = (
 
   const allSunk = () => {
     if (
-      submarine.isSunk()
-      // destroyer.isSunk() &&
-      // battleship.isSunk() &&
-      // carrier.isSunk()
+      submarine.isSunk() &&
+      destroyer.isSunk() &&
+      battleship.isSunk() &&
+      carrier.isSunk()
     ) {
       return true;
     }

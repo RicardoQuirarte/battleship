@@ -1,20 +1,16 @@
-function generatedCoord() {
+export const generatedCoord = () => {
   const characters = "abcdefghij";
   const numbers = "0123456789";
-  let result1 = "";
-  let result2 = "";
-  for (let i = 0; i < 1; i++) {
-    result1 += characters.charAt(Math.floor(Math.random() * characters.length));
-  }
-  for (let i = 0; i < 1; i++) {
-    result2 += numbers.charAt(Math.floor(Math.random() * numbers.length));
-  }
+  const result1 = characters.charAt(
+    Math.floor(Math.random() * characters.length)
+  );
+  const result2 = numbers.charAt(Math.floor(Math.random() * numbers.length));
   return result1 + result2;
-}
+};
 
 const letters = [];
 
-function generatedCoordShip(number) {
+export const generatedCoordShip = (number) => {
   const characters = "abcdefghij";
   const numbers = "0123456789";
   let result = characters.charAt(Math.floor(Math.random() * characters.length));
@@ -27,7 +23,8 @@ function generatedCoordShip(number) {
   letters.push(result);
 
   const coord = result + result2;
-  const array = [coord];
+  const array = [];
+  array.push(coord);
 
   for (let i = 1; i < number; i++) {
     if (result2 >= 9) {
@@ -44,7 +41,5 @@ function generatedCoordShip(number) {
       array.push(coord2);
     }
   }
-  return { array };
-}
-
-export default generatedCoord;
+  return array;
+};

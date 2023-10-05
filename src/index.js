@@ -1,8 +1,8 @@
 import "./style/style.css";
 import Gameboard from "./gameboard";
 import { Player, PlayerAI } from "./player";
+import { generatedCoordShip } from "./generatedCoord";
 import { renderGameboard, renderGameboardComputer } from "./dom";
-import { generatedCoord, generatedCoordShip } from "./generatedCoord";
 
 const initialPage = document.querySelector(".initial-page");
 const container = document.querySelector(".container");
@@ -15,6 +15,7 @@ const submarine = document.querySelector("#submarine");
 const destroyer = document.querySelector("#destroyer");
 const battleship = document.querySelector("#battleship");
 const carrier = document.querySelector("#carrier");
+const required = document.querySelector(".required");
 
 const placementGameboard = Gameboard();
 renderGameboardComputer(placementGameboard.createGrid(), placementContainer);
@@ -41,29 +42,18 @@ carrier.addEventListener("focusout", () => {
 });
 
 function startGame(e) {
-  e.preventDefault();
   initialPage.classList.add("remove");
   const ship1 = submarine.value.split("-");
   const ship2 = destroyer.value.split("-");
   const ship3 = battleship.value.split("-");
   const ship4 = carrier.value.split("-");
 
-  const useCoordinates = [];
-  const randomShip = () => {
-    let randomCoord = generatedCoordShip();
-    while (useCoordinates.includes(randomCoord)) {
-      randomCoord = generatedCoordShip();
-    }
-    useCoordinates.push(randomCoord);
-    return randomCoord;
-  };
-
-  console.log(generatedCoordShip(2));
-  console.log(generatedCoordShip(3));
-  console.log(generatedCoordShip(4));
-  console.log(generatedCoordShip(5));
-
-  const gameboardOne = Gameboard(ship1, ship2, ship3, ship4);
+  const gameboardOne = Gameboard(
+    generatedCoordShip(2),
+    generatedCoordShip(3),
+    generatedCoordShip(4),
+    generatedCoordShip(5)
+  );
   const gameboardTwo = Gameboard(ship1, ship2, ship3, ship4);
 
   const ricardo = Player(gameboardOne);
@@ -73,7 +63,13 @@ function startGame(e) {
     const result = computer.attack();
     const random = result.randomPlay;
     const div = document.querySelector(`#${random}`);
-    if (result.result === "You hit a ship!") {
+    if (
+      result.result === "You hit a ship!" ||
+      result.result === "You sank a submarine!! (2)" ||
+      result.result === "You sank a destroyer!! (3)" ||
+      result.result === "You sank a battleship!! (4)" ||
+      result.result === "You sank a carrier!! (5)"
+    ) {
       div.setAttribute("style", "background-color: red");
     }
     if (result.result === "You miss!")
@@ -81,6 +77,7 @@ function startGame(e) {
     if (computer.gameOver()) {
       messages.textContent = "Computer has won the game 🖥️";
       playAgain.textContent = "Play again";
+      playAgain.classList.add("play-again-style");
       container.classList.add("clicked");
     }
   }
@@ -89,7 +86,13 @@ function startGame(e) {
     const result = ricardo.attack(element);
     div.classList.add("clicked");
     messages.textContent = result;
-    if (result === "You hit a ship!") {
+    if (
+      result === "You hit a ship!" ||
+      result === "You sank a submarine!! (2)" ||
+      result === "You sank a destroyer!! (3)" ||
+      result === "You sank a battleship!! (4)" ||
+      result === "You sank a carrier!! (5)"
+    ) {
       div.setAttribute("style", "background-color: red");
     }
     if (result === "You miss!") {
@@ -98,6 +101,7 @@ function startGame(e) {
     if (ricardo.gameOver()) {
       messages.textContent = "Ricardo has won the game! 🎉";
       playAgain.textContent = "Play again";
+      playAgain.classList.add("play-again-style");
       container.classList.add("clicked");
     }
     attackComputer();
@@ -107,7 +111,18 @@ function startGame(e) {
   renderGameboardComputer(gameboardTwo.createGrid(), container2);
 }
 
-submitCoords.addEventListener("click", startGame);
+submitCoords.addEventListener("click", (e) => {
+  e.preventDefault();
+  if (
+    submarine.checkValidity() &&
+    destroyer.checkValidity() &&
+    battleship.checkValidity() &&
+    carrier.checkValidity()
+  ) {
+    startGame();
+  }
+  required.classList.add("color");
+});
 
 playAgain.addEventListener("click", () => {
   location.reload();

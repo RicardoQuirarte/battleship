@@ -1,4 +1,4 @@
-import generatedCoord from "./generatedCoord";
+import { generatedCoord } from "./generatedCoord";
 
 export const Player = (gameboard) => {
   const attack = (coordinates) => {
